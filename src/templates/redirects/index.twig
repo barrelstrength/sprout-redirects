@@ -1,0 +1,26 @@
+{% extends "sprout-redirects/_layouts/elementindex" %}
+{% set elementType = 'barrelstrength\\sproutredirects\\elements\\Redirect' %}
+{% set title = "Redirects" %}
+
+{% do view.registerAssetBundle("barrelstrength\\sproutredirects\\web\\assets\\redirects\\RedirectsAsset") %}
+
+{% block actionButton %}
+    <div class="buttons">
+        <a class="btn submit add icon" id="sprout-redirects-new-button"
+           href="{{ url('sprout-redirects/redirects/new/' ~ currentSite.handle) }}">{{ "New Redirect"|t }}</a>
+    </div>
+{% endblock %}
+
+{% css %}
+    .element.small.hasstatus
+    {
+    word-break: break-all;
+    hyphens: auto;
+    }
+{% endcss %}
+
+{% js %}
+    $(document).ready(function() {
+    new RedirectIndex();
+    });
+{% endjs %}
