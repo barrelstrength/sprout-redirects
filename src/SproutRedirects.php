@@ -17,6 +17,7 @@ use barrelstrength\sproutredirects\web\twig\variables\SproutRedirectsVariable;
 use Craft;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
+use craft\helpers\UrlHelper;
 use craft\web\twig\variables\CraftVariable;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
@@ -113,7 +114,8 @@ class SproutRedirects extends Plugin
             if ($exception instanceof HttpException && $exception->statusCode === 404) {
 
                 $currentSite = Craft::$app->getSites()->getCurrentSite();
-                $absoluteUrl = $request->getAbsoluteUrl();
+                $path = $request->getPathInfo();
+                $absoluteUrl = UrlHelper::url($path);
 
                 // Check if the requested URL needs to be redirected
                 $redirect = SproutRedirects::$app->redirects->findUrl($absoluteUrl, $currentSite);
@@ -127,7 +129,11 @@ class SproutRedirects extends Plugin
                     SproutRedirects::$app->redirects->logRedirect($redirect->id, $currentSite);
 
                     if ($redirect->enabled && (int)$redirect->method !== 404) {
-                        Craft::$app->getResponse()->redirect($redirect->getAbsoluteNewUrl(), $redirect->method);
+                        if (UrlHelper::isAbsoluteUrl($redirect->newUrl)){
+                            Craft::$app->getResponse()->redirect($redirect->newUrl, $redirect->method);
+                        }else{
+                            Craft::$app->getResponse()->redirect($redirect->getAbsoluteNewUrl(), $redirect->method);
+                        }
                         Craft::$app->end();
                     }
                 }
