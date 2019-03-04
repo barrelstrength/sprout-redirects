@@ -34,7 +34,6 @@ class Install extends Migration
     public function safeUp()
     {
         $this->createTables();
-        $this->checkOldRedirectElements();
         return true;
     }
 
@@ -89,7 +88,6 @@ class Install extends Migration
     }
 
     /**
-     * @throws \craft\errors\SiteNotFoundException
      * @throws \craft\errors\StructureNotFoundException
      * @throws \yii\base\ErrorException
      * @throws \yii\base\Exception
@@ -120,22 +118,6 @@ class Install extends Migration
         // Add our default plugin settings
         $pluginHandle = 'sprout-redirects';
         $projectConfig->set(Plugins::CONFIG_PLUGINS_KEY . '.' . $pluginHandle . '.settings', $settings->toArray());
-    }
-
-    protected function checkOldRedirectElements()
-    {
-        $types = [
-            0 => [
-                'oldType' => 'barrelstrength\sproutseo\elements\Redirect',
-                'newType' => 'barrelstrength\sproutredirects\elements\Redirect'
-            ]
-        ];
-
-        foreach ($types as $type) {
-            $this->update('{{%elements}}', [
-                'type' => $type['newType']
-            ], ['type' => $type['oldType']], [], false);
-        }
     }
 
     /**
