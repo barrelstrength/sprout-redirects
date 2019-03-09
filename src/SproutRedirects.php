@@ -59,6 +59,20 @@ class SproutRedirects extends Plugin
      */
     public $schemaVersion = '1.0.0';
 
+    const EDITION_LITE = 'lite';
+    const EDITION_PRO = 'pro';
+
+    /**
+     * @inheritdoc
+     */
+    public static function editions(): array
+    {
+        return [
+            self::EDITION_LITE,
+            self::EDITION_PRO,
+        ];
+    }
+
     /**
      * @inheritdoc
      *
