@@ -14,11 +14,14 @@ use barrelstrength\sproutredirects\jobs\Delete404;
 use barrelstrength\sproutredirects\models\Settings;
 
 use Craft;
+use craft\events\ExceptionEvent;
+use craft\helpers\UrlHelper;
 use craft\models\Site;
 use yii\base\Component;
 
 
 use yii\base\Exception;
+use yii\web\HttpException;
 
 
 /**
@@ -28,6 +31,68 @@ use yii\base\Exception;
  */
 class Redirects extends Component
 {
+    /**
+     * @param ExceptionEvent $event
+     *
+     * @throws \Throwable
+     * @throws \craft\errors\SiteNotFoundException
+     * @throws \yii\base\Exception
+     * @throws \yii\base\ExitException
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function handleRedirectsOnException(ExceptionEvent $event) {
+        $request = Craft::$app->getRequest();
+
+        /** @var SproutRedirects $plugin */
+        $plugin = Craft::$app->plugins->getPlugin('sprout-redirects');
+        $pluginSettings = $plugin->getSettings();
+        \Craft::dd($pluginSettings);
+        // Only handle front-end site requests that are not live preview
+        if (!$request->getIsSiteRequest() OR $request->getIsLivePreview()) {
+            return;
+        }
+
+        $exception = $event->exception;
+
+        // Rendering Twig can generate a 404 also: i.e. {% exit 404 %}
+        if ($event->exception instanceof \Twig_Error_Runtime) {
+            // If this is a Twig Runtime error, use the previous exception
+            $exception = $exception->getPrevious();
+        }
+
+        /**
+         * @var HttpException $exception
+         */
+        if ($exception instanceof HttpException && $exception->statusCode === 404) {
+
+            $currentSite = Craft::$app->getSites()->getCurrentSite();
+            $path = $request->getPathInfo();
+            $absoluteUrl = UrlHelper::url($path);
+
+            // Check if the requested URL needs to be redirected
+            $redirect = SproutRedirects::$app->redirects->findUrl($absoluteUrl, $currentSite);
+
+            // @todo - confirm setting is accessed properly and this condition works
+            if (!$redirect && $pluginSettings->enable404RedirectLog) {
+                // Save new 404 Redirect
+                $redirect = SproutRedirects::$app->redirects->save404Redirect($absoluteUrl, $currentSite);
+            }
+
+            if ($redirect) {
+                SproutRedirects::$app->redirects->logRedirect($redirect->id, $currentSite);
+
+                if ($redirect->enabled && (int)$redirect->method !== 404) {
+                    if (UrlHelper::isAbsoluteUrl($redirect->newUrl)){
+                        Craft::$app->getResponse()->redirect($redirect->newUrl, $redirect->method);
+                    }else{
+                        Craft::$app->getResponse()->redirect($redirect->getAbsoluteNewUrl(), $redirect->method);
+                    }
+                    Craft::$app->end();
+                }
+            }
+        }
+    }
+
     /**
      * Find a regex url using the preg_match php function and replace
      * capture groups if any using the preg_replace php function also check normal urls

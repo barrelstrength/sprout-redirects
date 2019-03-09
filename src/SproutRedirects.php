@@ -17,7 +17,9 @@ use barrelstrength\sproutredirects\web\twig\variables\SproutRedirectsVariable;
 use Craft;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterUserPermissionsEvent;
 use craft\helpers\UrlHelper;
+use craft\services\UserPermissions;
 use craft\web\twig\variables\CraftVariable;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
@@ -101,57 +103,11 @@ class SproutRedirects extends Plugin
         });
 
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
-            $variable = $event->sender;
-            $variable->set('sproutRedirects', SproutRedirectsVariable::class);
+            $event->sender->set('sproutRedirects', SproutRedirectsVariable::class);
         });
 
         Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, function(ExceptionEvent $event) {
-
-            $request = Craft::$app->getRequest();
-
-            // Only handle front-end site requests that are not live preview
-            if (!$request->getIsSiteRequest() OR $request->getIsLivePreview()) {
-                return;
-            }
-
-            $exception = $event->exception;
-
-            // Rendering Twig can generate a 404 also: i.e. {% exit 404 %}
-            if ($event->exception instanceof \Twig_Error_Runtime) {
-                // If this is a Twig Runtime error, use the previous exception
-                $exception = $exception->getPrevious();
-            }
-
-            /**
-             * @var HttpException $exception
-             */
-            if ($exception instanceof HttpException && $exception->statusCode === 404) {
-
-                $currentSite = Craft::$app->getSites()->getCurrentSite();
-                $path = $request->getPathInfo();
-                $absoluteUrl = UrlHelper::url($path);
-
-                // Check if the requested URL needs to be redirected
-                $redirect = SproutRedirects::$app->redirects->findUrl($absoluteUrl, $currentSite);
-
-                if (!$redirect && $this->getSettings()->enable404RedirectLog) {
-                    // Save new 404 Redirect
-                    $redirect = SproutRedirects::$app->redirects->save404Redirect($absoluteUrl, $currentSite);
-                }
-
-                if ($redirect) {
-                    SproutRedirects::$app->redirects->logRedirect($redirect->id, $currentSite);
-
-                    if ($redirect->enabled && (int)$redirect->method !== 404) {
-                        if (UrlHelper::isAbsoluteUrl($redirect->newUrl)){
-                            Craft::$app->getResponse()->redirect($redirect->newUrl, $redirect->method);
-                        }else{
-                            Craft::$app->getResponse()->redirect($redirect->getAbsoluteNewUrl(), $redirect->method);
-                        }
-                        Craft::$app->end();
-                    }
-                }
-            }
+            SproutRedirects::$app->redirects->handleRedirectsOnException($event);
         });
     }
 
