@@ -1,7 +1,7 @@
 {
   "name": "barrelstrength/sprout-redirects",
   "description": "Manage redirects and monitor 404s",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "type": "craft-plugin",
   "keywords": [
     "craft",
@@ -26,6 +26,7 @@
   },
   "require": {
     "craftcms/cms": "^3.1.0",
+    "barrelstrength/sprout-base-redirects": "^1.0.0",
     "barrelstrength/sprout-base": "^4.0.5"
   },
   "autoload": {

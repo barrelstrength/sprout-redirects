@@ -12,18 +12,12 @@ use craft\base\Component;
 class App extends Component
 {
     /**
-     * @var Redirects
-     */
-    public $redirects;
-
-    /**
      * @var Settings
      */
     public $settings;
 
     public function init()
     {
-        $this->redirects = new Redirects();
         $this->settings = new Settings();
     }
 }

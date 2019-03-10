@@ -46,37 +46,4 @@ class SproutRedirectsVariable
     {
         return Craft::$app->plugins->getPlugin('sprout-redirects')->getSettings();
     }
-
-    /**
-     * @param $id
-     *
-     * @return \craft\base\ElementInterface|null
-     */
-    public function getElementById($id)
-    {
-        $element = Craft::$app->elements->getElementById($id);
-
-        return $element != null ? $element : null;
-    }
-
-
-    /**
-     * @param $string
-     *
-     * @return DateTime
-     */
-    public function getDate($string)
-    {
-        return new DateTime($string['date'], new \DateTimeZone(Craft::$app->getTimeZone()));
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSiteIds()
-    {
-        $sites = Craft::$app->getSites()->getAllSites();
-
-        return $sites;
-    }
 }
