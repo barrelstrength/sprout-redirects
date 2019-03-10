@@ -18,6 +18,9 @@ use barrelstrength\sproutredirects\web\twig\variables\SproutRedirectsVariable;
 use Craft;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterUserPermissionsEvent;
+use craft\helpers\UrlHelper;
+use craft\services\UserPermissions;
 use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use yii\base\Event;
@@ -56,6 +59,20 @@ class SproutRedirects extends Plugin
      */
     public $schemaVersion = '1.0.0';
 
+    const EDITION_LITE = 'lite';
+    const EDITION_PRO = 'pro';
+
+    /**
+     * @inheritdoc
+     */
+    public static function editions(): array
+    {
+        return [
+            self::EDITION_LITE,
+            self::EDITION_PRO,
+        ];
+    }
+
     /**
      * @inheritdoc
      *
@@ -82,8 +99,11 @@ class SproutRedirects extends Plugin
         });
 
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
-            $variable = $event->sender;
-            $variable->set('sproutRedirects', SproutRedirectsVariable::class);
+            $event->sender->set('sproutRedirects', SproutRedirectsVariable::class);
+        });
+
+        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, function(ExceptionEvent $event) {
+            SproutRedirects::$app->redirects->handleRedirectsOnException($event);
         });
     }
 
