@@ -29,12 +29,14 @@ class Install extends Migration
      * @return bool
      * @throws \Throwable
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $migration = new SproutBaseRedirectsInstall();
+
         ob_start();
         $migration->safeUp();
         ob_end_clean();
+
         return true;
     }
 }

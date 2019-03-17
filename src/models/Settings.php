@@ -16,7 +16,7 @@ use Craft;
  *
  * @property array $settingsNavItems
  */
-class Settings extends Model implements SproutSettingsInterface
+class Settings extends Model
 {
     /**
      * @var string
@@ -42,25 +42,4 @@ class Settings extends Model implements SproutSettingsInterface
      * @var bool
      */
     public $enableMultilingualSitemaps = false;
-
-    /**
-     * @inheritdoc
-     */
-    public function getSettingsNavItems(): array
-    {
-        return [
-            'general' => [
-                'label' => Craft::t('sprout-redirects', 'General'),
-                'url' => 'sprout-redirects/settings/general',
-                'selected' => 'general',
-                'template' => 'sprout-redirects/settings/general'
-            ],
-            'redirects' => [
-                'label' => Craft::t('sprout-redirects', 'Redirects'),
-                'url' => 'sprout-redirects/settings/redirects',
-                'selected' => 'redirects',
-                'template' => 'sprout-redirects/settings/redirects'
-            ]
-        ];
-    }
 }

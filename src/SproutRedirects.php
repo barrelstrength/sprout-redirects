@@ -19,9 +19,6 @@ use barrelstrength\sproutredirects\web\twig\variables\SproutRedirectsVariable;
 use Craft;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
-use craft\events\RegisterUserPermissionsEvent;
-use craft\helpers\UrlHelper;
-use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
 use craft\web\twig\variables\CraftVariable;
@@ -39,13 +36,6 @@ class SproutRedirects extends Plugin
     use BaseSproutTrait;
 
     /**
-     * Enable use of SproutRedirects::$app-> in place of Craft::$app->
-     *
-     * @var \barrelstrength\sproutredirects\services\App
-     */
-    public static $app;
-
-    /**
      * Identify our plugin for BaseSproutTrait
      *
      * @var string
@@ -56,6 +46,11 @@ class SproutRedirects extends Plugin
      * @var bool
      */
     public $hasCpSection = true;
+
+    /**
+     * @var bool
+     */
+    public $hasCpSettings = true;
 
     /**
      * @var string
@@ -78,8 +73,6 @@ class SproutRedirects extends Plugin
 
     /**
      * @inheritdoc
-     *
-     * @throws \yii\base\InvalidConfigException
      */
     public function init()
     {
@@ -88,12 +81,6 @@ class SproutRedirects extends Plugin
         SproutBaseHelper::registerModule();
         SproutBaseFieldsHelper::registerModule();
         SproutBaseRedirectsHelper::registerModule();
-
-        $this->setComponents([
-            'app' => App::class
-        ]);
-
-        self::$app = $this->get('app');
 
         Craft::setAlias('@sproutredirects', $this->getBasePath());
 
@@ -119,32 +106,33 @@ class SproutRedirects extends Plugin
             $parent['label'] = $this->getSettings()->pluginNameOverride;
         }
 
-        return array_merge($parent, [
-            'subnav' => [
-                'redirects' => [
-                    'label' => Craft::t('sprout-redirects', 'Redirects'),
-                    'url' => 'sprout-base-redirects/redirects'
-                ],
-                'settings' => [
-                    'label' => Craft::t('sprout-redirects', 'Settings'),
-                    'url' => 'sprout-redirects/settings'
-                ],
-            ]
-        ]);
+        return $parent;
     }
 
     /**
      * @return Settings
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): Settings
     {
         return new Settings();
     }
 
     /**
+     * @return string|null
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
+     */
+    protected function settingsHtml()
+    {
+        return \Craft::$app->getView()->renderTemplate('sprout-redirects/settings', [
+            'settings' => $this->getSettings()
+        ]);
+    }
+
+    /**
      * @return array
      */
-    private function getCpUrlRules()
+    private function getCpUrlRules(): array
     {
         return [
             'sprout-redirects' => [
@@ -152,22 +140,22 @@ class SproutRedirects extends Plugin
             ],
 
             // Redirects
-            'sprout-base-redirects/redirects/edit/<redirectId:\d+>/<siteHandle:.*>' =>
+            'sprout-redirects/redirects/edit/<redirectId:\d+>/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/edit-redirect',
 
-            'sprout-base-redirects/redirects/edit/<redirectId:\d+>' =>
+            'sprout-redirects/redirects/edit/<redirectId:\d+>' =>
                 'sprout-base-redirects/redirects/edit-redirect',
 
-            'sprout-base-redirects/redirects/new/<siteHandle:.*>' =>
+            'sprout-redirects/redirects/new/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/edit-redirect',
 
-            'sprout-base-redirects/redirects/new' =>
+            'sprout-redirects/redirects/new' =>
                 'sprout-base-redirects/redirects/edit-redirect',
 
-            'sprout-base-redirects/redirects/<siteHandle:.*>' =>
+            'sprout-redirects/redirects/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
 
-            'sprout-base-redirects/redirects' =>
+            'sprout-redirects/redirects' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
 
             // Settings
