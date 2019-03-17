@@ -42,4 +42,14 @@ class Settings extends Model
      * @var bool
      */
     public $enableMultilingualSitemaps = false;
+
+    /**
+     * @return array
+     */
+    public static function getSharedPermissions(): array
+    {
+        return [
+            'editRedirects'
+        ];
+    }
 }
