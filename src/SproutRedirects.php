@@ -18,6 +18,8 @@ use barrelstrength\sproutredirects\web\twig\variables\SproutRedirectsVariable;
 use Craft;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterUserPermissionsEvent;
+use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
 use craft\web\twig\variables\CraftVariable;
@@ -83,17 +85,22 @@ class SproutRedirects extends Plugin
 
         Craft::setAlias('@sproutredirects', $this->getBasePath());
 
+        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, function(ExceptionEvent $event) {
+            SproutBaseRedirects::$app->redirects->handleRedirectsOnException($event, $this->handle);
+        });
+
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
             $event->rules = array_merge($event->rules, $this->getCpUrlRules());
+        });
+
+        Event::on(UserPermissions::class, UserPermissions::EVENT_REGISTER_PERMISSIONS, function(RegisterUserPermissionsEvent $event) {
+            $event->permissions['Sprout Redirects'] = $this->getUserPermissions();
         });
 
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
             $event->sender->set('sproutRedirects', SproutRedirectsVariable::class);
         });
 
-        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, function(ExceptionEvent $event) {
-            SproutBaseRedirects::$app->redirects->handleRedirectsOnException($event, $this->handle);
-        });
     }
 
     public function getCpNavItem()
