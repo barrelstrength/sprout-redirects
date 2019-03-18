@@ -13,7 +13,6 @@ use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
 use barrelstrength\sproutredirects\models\Settings;
-use barrelstrength\sproutredirects\services\App;
 use barrelstrength\sproutredirects\web\twig\variables\SproutRedirectsVariable;
 
 use Craft;
@@ -135,27 +134,20 @@ class SproutRedirects extends Plugin
     private function getCpUrlRules(): array
     {
         return [
-            'sprout-redirects' => [
-                'template' => 'sprout-base-redirects/redirects'
-            ],
-
             // Redirects
             'sprout-redirects/redirects/edit/<redirectId:\d+>/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/edit-redirect',
-
             'sprout-redirects/redirects/edit/<redirectId:\d+>' =>
                 'sprout-base-redirects/redirects/edit-redirect',
-
             'sprout-redirects/redirects/new/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/edit-redirect',
-
             'sprout-redirects/redirects/new' =>
                 'sprout-base-redirects/redirects/edit-redirect',
-
             'sprout-redirects/redirects/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
-
             'sprout-redirects/redirects' =>
+                'sprout-base-redirects/redirects/redirects-index-template',
+            'sprout-redirects' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
 
             // Settings
