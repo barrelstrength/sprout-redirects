@@ -12,9 +12,7 @@ use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
-use barrelstrength\sproutredirects\models\Settings;
-use barrelstrength\sproutredirects\web\twig\variables\SproutRedirectsVariable;
-
+use barrelstrength\sproutbaseredirects\models\Settings;
 use Craft;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
@@ -22,7 +20,6 @@ use craft\events\RegisterUserPermissionsEvent;
 use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
-use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use yii\base\Event;
 
@@ -96,11 +93,6 @@ class SproutRedirects extends Plugin
         Event::on(UserPermissions::class, UserPermissions::EVENT_REGISTER_PERMISSIONS, function(RegisterUserPermissionsEvent $event) {
             $event->permissions['Sprout Redirects'] = $this->getUserPermissions();
         });
-
-        Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
-            $event->sender->set('sproutRedirects', SproutRedirectsVariable::class);
-        });
-
     }
 
     public function getCpNavItem()
