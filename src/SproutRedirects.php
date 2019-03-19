@@ -134,19 +134,19 @@ class SproutRedirects extends Plugin
     {
         return [
             // Redirects
-            'sprout-redirects/redirects/edit/<redirectId:\d+>/<siteHandle:.*>' =>
-                'sprout-base-redirects/redirects/edit-redirect',
-            'sprout-redirects/redirects/edit/<redirectId:\d+>' =>
-                'sprout-base-redirects/redirects/edit-redirect',
-            'sprout-redirects/redirects/new/<siteHandle:.*>' =>
-                'sprout-base-redirects/redirects/edit-redirect',
-            'sprout-redirects/redirects/new' =>
-                'sprout-base-redirects/redirects/edit-redirect',
-            'sprout-redirects/redirects/<siteHandle:.*>' =>
+            '<pluginHandle:sprout-redirects>/redirects/edit/<redirectId:\d+>/<siteHandle:.*>' =>
+                'sprout-base-redirects/redirects/edit-redirect-template',
+            '<pluginHandle:sprout-redirects>/redirects/edit/<redirectId:\d+>' =>
+                'sprout-base-redirects/redirects/edit-redirect-template',
+            '<pluginHandle:sprout-redirects>/redirects/new/<siteHandle:.*>' =>
+                'sprout-base-redirects/redirects/edit-redirect-template',
+            '<pluginHandle:sprout-redirects>/redirects/new' =>
+                'sprout-base-redirects/redirects/edit-redirect-template',
+            '<pluginHandle:sprout-redirects>/redirects/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
-            'sprout-redirects/redirects' =>
+            '<pluginHandle:sprout-redirects>/redirects' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
-            'sprout-redirects' =>
+            '<pluginHandle:sprout-redirects>' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
 
             // Settings
