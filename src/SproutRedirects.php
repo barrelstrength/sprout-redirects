@@ -83,7 +83,7 @@ class SproutRedirects extends Plugin
         Craft::setAlias('@sproutredirects', $this->getBasePath());
 
         Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, function(ExceptionEvent $event) {
-            SproutBaseRedirects::$app->redirects->handleRedirectsOnException($event, $this->handle);
+            SproutBaseRedirects::$app->redirects->handleRedirectsOnException($event);
         });
 
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
