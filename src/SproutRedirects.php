@@ -27,6 +27,7 @@ use yii\base\Event;
  *
  * @property mixed $cpNavItem
  * @property array $cpUrlRules
+ * @property array $userPermissions
  * @property array $siteUrlRules
  */
 class SproutRedirects extends Plugin
