@@ -1,47 +1,45 @@
 {
-  "name": "barrelstrength/sprout-redirects",
-  "description": "Manage redirects and monitor 404s",
-  "version": "1.0.0-beta.2",
-  "type": "craft-plugin",
-  "keywords": [
-    "craft",
-    "cms",
-    "craftcms",
-    "seo",
-    "redirects"
-  ],
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "Barrel Strength",
-      "homepage": "https://www.barrelstrengthdesign.com/"
+    "name": "barrelstrength/sprout-redirects",
+    "description": "Manage redirects and monitor 404s",
+    "version": "1.0.0",
+    "type": "craft-plugin",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "seo",
+        "redirects"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Barrel Strength",
+            "homepage": "https://www.barrelstrengthdesign.com/"
+        }
+    ],
+    "support": {
+        "email": "sprout@barrelstrengthdesign.com",
+        "issues": "https://github.com/barrelstrength/craft-sprout-redirects/issues?state=open",
+        "source": "https://github.com/barrelstrength/craft-sprout-redirects",
+        "docs": "https://sprout.barrelstrengthdesign.com/docs/redirects",
+        "rss": "https://github.com/barrelstrength/craft-sprout-redirects/commits/v2.atom"
+    },
+    "require": {
+        "craftcms/cms": "^3.1.0",
+        "barrelstrength/sprout-base-redirects": "^1.0.7",
+        "barrelstrength/sprout-base": "^4.0.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "barrelstrength\\sproutredirects\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Sprout Redirects",
+        "handle": "sprout-redirects",
+        "developer": "Barrel Strength",
+        "developerUrl": "https://barrelstrengthdesign.com",
+        "documentationUrl": "https://sprout.barrelstrengthdesign.com/docs/redirects",
+        "class": "barrelstrength\\sproutredirects\\SproutRedirects"
     }
-  ],
-  "support": {
-    "email": "sprout@barrelstrengthdesign.com",
-    "issues": "https://github.com/barrelstrength/sprout-redirects/issues?state=open",
-    "source": "https://github.com/barrelstrength/sprout-redirects",
-    "docs": "https://sprout.barrelstrengthdesign.com/craft-plugins/seo/docs",
-    "rss": "https://github.com/barrelstrength/sprout-redirects/commits/v2.atom"
-  },
-  "require": {
-    "craftcms/cms": "^3.1.0",
-    "barrelstrength/sprout-base-redirects": "^1.0.7",
-    "barrelstrength/sprout-base": "^4.0.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "barrelstrength\\sproutredirects\\": "src/"
-    }
-  },
-  "extra": {
-    "name": "Sprout Redirects",
-    "handle": "sprout-redirects",
-    "developer": "Barrel Strength",
-    "developerUrl": "https://barrelstrengthdesign.com",
-    "documentationUrl": "https://sprout.barrelstrengthdesign.com/craft-plugins/seo",
-    "changelogUrl": "https://raw.githubusercontent.com/BarrelStrength/sprout-redirects/master/CHANGELOG.md",
-    "downloadUrl": "https://github.com/BarrelStrength/sprout-redirects/archive/master.zip",
-    "class": "barrelstrength\\sproutredirects\\SproutRedirects"
-  }
 }

@@ -7,8 +7,6 @@
 
 namespace barrelstrength\sproutredirects\migrations;
 
-use Craft;
-
 use craft\db\Migration;
 use barrelstrength\sproutbaseredirects\migrations\Install as SproutBaseRedirectsInstall;
 use barrelstrength\sproutbase\migrations\Install as SproutBaseInstall;
