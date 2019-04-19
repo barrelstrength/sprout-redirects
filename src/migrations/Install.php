@@ -11,6 +11,7 @@ use Craft;
 
 use craft\db\Migration;
 use barrelstrength\sproutbaseredirects\migrations\Install as SproutBaseRedirectsInstall;
+use barrelstrength\sproutbase\migrations\Install as SproutBaseInstall;
 
 class Install extends Migration
 {
@@ -33,6 +34,16 @@ class Install extends Migration
     {
         $migration = new SproutBaseRedirectsInstall();
 
+        ob_start();
+        $migration->safeUp();
+        ob_end_clean();
+
+        $migration = new SproutBaseInstall();
+        ob_start();
+        $migration->safeUp();
+        ob_end_clean();
+
+        $migration = new SproutBaseInstall();
         ob_start();
         $migration->safeUp();
         ob_end_clean();

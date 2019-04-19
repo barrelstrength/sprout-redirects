@@ -98,7 +98,6 @@ class SproutRedirects extends Plugin
     public function getCpNavItem()
     {
         $parent = parent::getCpNavItem();
-
         // Allow user to override plugin name in sidebar
         if ($this->getSettings()->pluginNameOverride) {
             $parent['label'] = $this->getSettings()->pluginNameOverride;
@@ -113,6 +112,16 @@ class SproutRedirects extends Plugin
     protected function createSettingsModel(): Settings
     {
         return new Settings();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettings()
+    {
+        $settings = SproutBaseRedirects::$app->settings->getRedirectsSettings();
+
+        return $settings;
     }
 
     /**
