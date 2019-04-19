@@ -30,18 +30,13 @@ class Install extends Migration
      */
     public function safeUp(): bool
     {
+        $migration = new SproutBaseInstall();
+        ob_start();
+        $migration->safeUp();
+        ob_end_clean();
+
         $migration = new SproutBaseRedirectsInstall();
 
-        ob_start();
-        $migration->safeUp();
-        ob_end_clean();
-
-        $migration = new SproutBaseInstall();
-        ob_start();
-        $migration->safeUp();
-        ob_end_clean();
-
-        $migration = new SproutBaseInstall();
         ob_start();
         $migration->safeUp();
         ob_end_clean();
