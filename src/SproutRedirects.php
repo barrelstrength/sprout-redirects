@@ -15,8 +15,10 @@ use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
 use barrelstrength\sproutbaseredirects\models\Settings;
 use Craft;
 use craft\base\Plugin;
+use craft\db\Query;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
+use craft\helpers\Json;
 use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
@@ -28,6 +30,7 @@ use yii\base\Event;
  * @property mixed $cpNavItem
  * @property array $cpUrlRules
  * @property array $userPermissions
+ * @property mixed $settings
  * @property array $siteUrlRules
  */
 class SproutRedirects extends Plugin
@@ -99,9 +102,35 @@ class SproutRedirects extends Plugin
     public function getCpNavItem()
     {
         $parent = parent::getCpNavItem();
+
+        // Query the db directly because the SproutBaseRedirects Yii module may not yet be available
+        $pluginSettings = (new Query())
+            ->select('settings')
+            ->from('{{%sproutbase_settings}}')
+            ->where([
+                'model' => Settings::class
+            ])
+            ->scalar();
+
+        $settings = json_decode($pluginSettings, true);
+
         // Allow user to override plugin name in sidebar
-        if ($this->getSettings()->pluginNameOverride) {
-            $parent['label'] = $this->getSettings()->pluginNameOverride;
+        if (isset($settings['pluginNameOverride']) && $settings['pluginNameOverride']) {
+            $parent['label'] = $settings['pluginNameOverride'];
+        }
+
+        if (Craft::$app->getUser()->checkPermission('sproutRedirects-editRedirects')) {
+            $parent['subnav']['redirects'] = [
+                'label' => Craft::t('sprout-redirects', 'Redirects'),
+                'url' => 'sprout-redirects/redirects'
+            ];
+        }
+
+        if (Craft::$app->getUser()->getIsAdmin()) {
+            $parent['subnav']['settings'] = [
+                'label' => Craft::t('sprout-redirects', 'Settings'),
+                'url' => 'sprout-redirects/settings'
+            ];
         }
 
         return $parent;
@@ -113,16 +142,6 @@ class SproutRedirects extends Plugin
     protected function createSettingsModel(): Settings
     {
         return new Settings();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getSettings()
-    {
-        $settings = SproutBaseRedirects::$app->settings->getRedirectsSettings();
-
-        return $settings;
     }
 
     /**
@@ -156,15 +175,20 @@ class SproutRedirects extends Plugin
                 'sprout-base-redirects/redirects/redirects-index-template',
             '<pluginHandle:sprout-redirects>/redirects' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
-            '<pluginHandle:sprout-redirects>' =>
-                'sprout-base-redirects/redirects/redirects-index-template',
 
             // Settings
-            'sprout-redirects/settings/<settingsSectionHandle:.*>' =>
-                'sprout/settings/edit-settings',
-
-            'sprout-redirects/settings' =>
-                'sprout/settings/edit-settings',
+            'sprout-redirects/settings/<settingsSectionHandle:.*>' => [
+                'route' => 'sprout/settings/edit-settings',
+                'params' => [
+                    'sproutBaseSettingsType' => Settings::class
+                ]
+            ],
+            'sprout-redirects/settings' => [
+                'route' => 'sprout/settings/edit-settings',
+                'params' => [
+                    'sproutBaseSettingsType' => Settings::class
+                ]
+            ]
         ];
     }
 
