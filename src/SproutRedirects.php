@@ -106,7 +106,7 @@ class SproutRedirects extends Plugin
         // Query the db directly because the SproutBaseRedirects Yii module may not yet be available
         $pluginSettings = (new Query())
             ->select('settings')
-            ->from('{{%sproutbase_settings}}')
+            ->from('{{%sprout_settings}}')
             ->where([
                 'model' => Settings::class
             ])
