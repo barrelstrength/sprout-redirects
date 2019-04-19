@@ -81,7 +81,6 @@ class SproutRedirects extends Plugin
         parent::init();
 
         SproutBaseHelper::registerModule();
-        SproutBaseFieldsHelper::registerModule();
         SproutBaseRedirectsHelper::registerModule();
 
         Craft::setAlias('@sproutredirects', $this->getBasePath());
