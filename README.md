@@ -4,7 +4,7 @@ User-friendly Redirect Manager with 404 tracking and Multi-Site support.
 
 ## Documentation
 
-See the [Sprout Website](https://sprout.barrelstrengthdesign.com/docs/redirects) for documentation, guides, and additional resources. 
+See the [Sprout Website](https://sprout.barrelstrengthdesign.com/docs/redirects/) for documentation, guides, and additional resources. 
 
 ## Support
 
