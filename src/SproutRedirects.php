@@ -200,7 +200,7 @@ class SproutRedirects extends Plugin
             // We need this permission on top of the accessplugin- permission
             // so that we can support the matching permission in Sprout SEO
             'sproutRedirects-editRedirects' => [
-                'label' => Craft::t('sprout-sitemaps', 'Edit Redirects')
+                'label' => Craft::t('sprout-redirects', 'Edit Redirects')
             ],
         ];
     }
