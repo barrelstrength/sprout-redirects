@@ -8,6 +8,7 @@
 namespace barrelstrength\sproutredirects;
 
 use barrelstrength\sproutbase\base\BaseSproutTrait;
+use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
@@ -19,6 +20,7 @@ use craft\db\Query;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
 use craft\helpers\Json;
+use craft\helpers\UrlHelper;
 use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
@@ -85,9 +87,10 @@ class SproutRedirects extends Plugin
 
         Craft::setAlias('@sproutredirects', $this->getBasePath());
 
-        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, function(ExceptionEvent $event) {
-            SproutBaseRedirects::$app->redirects->handleRedirectsOnException($event);
-        });
+        $redirectsService = SproutBaseRedirects::$app->redirects;
+        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, [
+            $redirectsService, 'handleRedirectsOnException'
+        ]);
 
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
             $event->rules = array_merge($event->rules, $this->getCpUrlRules());
@@ -133,6 +136,18 @@ class SproutRedirects extends Plugin
         }
 
         return $parent;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUpgradeUrl()
+    {
+        if (!SproutBase::$app->settings->isEdition('sprout-redirects', self::EDITION_PRO)) {
+            return UrlHelper::cpUrl('sprout-redirects/upgrade');
+        }
+
+        return null;
     }
 
     /**
