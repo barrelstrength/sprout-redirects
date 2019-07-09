@@ -25,6 +25,9 @@ use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
 use craft\events\ExceptionEvent;
 use craft\web\UrlManager;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use yii\base\Event;
 
 /**
@@ -33,6 +36,7 @@ use yii\base\Event;
  * @property array $cpUrlRules
  * @property array $userPermissions
  * @property mixed $settings
+ * @property null  $upgradeUrl
  * @property array $siteUrlRules
  */
 class SproutRedirects extends Plugin
@@ -160,12 +164,13 @@ class SproutRedirects extends Plugin
 
     /**
      * @return string|null
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     protected function settingsHtml()
     {
-        return \Craft::$app->getView()->renderTemplate('sprout-redirects/settings', [
+        return Craft::$app->getView()->renderTemplate('sprout-redirects/settings', [
             'settings' => $this->getSettings()
         ]);
     }
