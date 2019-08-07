@@ -4,7 +4,6 @@ namespace barrelstrength\sproutseo\migrations;
 
 use barrelstrength\sproutbaseredirects\migrations\m190806_000000_delete_soft_deleted_redirect_elements;
 use craft\db\Migration;
-use craft\errors\InvalidPluginException;
 use Throwable;
 
 /**

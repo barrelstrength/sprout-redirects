@@ -10,7 +10,6 @@ namespace barrelstrength\sproutredirects;
 use barrelstrength\sproutbase\base\BaseSproutTrait;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
-use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
 use barrelstrength\sproutbaseredirects\models\Settings;
@@ -19,11 +18,9 @@ use craft\base\Plugin;
 use craft\db\Query;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
-use craft\helpers\Json;
 use craft\helpers\UrlHelper;
 use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
-use craft\events\ExceptionEvent;
 use craft\web\UrlManager;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -63,7 +60,7 @@ class SproutRedirects extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.0';
+    public $schemaVersion = '1.1.0';
 
     const EDITION_LITE = 'lite';
     const EDITION_PRO = 'pro';

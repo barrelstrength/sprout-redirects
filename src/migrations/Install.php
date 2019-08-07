@@ -10,6 +10,7 @@ namespace barrelstrength\sproutredirects\migrations;
 use craft\db\Migration;
 use barrelstrength\sproutbaseredirects\migrations\Install as SproutBaseRedirectsInstall;
 use barrelstrength\sproutbase\migrations\Install as SproutBaseInstall;
+use Throwable;
 
 class Install extends Migration
 {
@@ -26,7 +27,7 @@ class Install extends Migration
 
     /**
      * @return bool
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function safeUp(): bool
     {
