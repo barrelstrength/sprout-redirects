@@ -1,6 +1,6 @@
 <?php
 
-namespace barrelstrength\sproutseo\migrations;
+namespace barrelstrength\sproutredirects\migrations;
 
 use barrelstrength\sproutbaseredirects\migrations\m190806_000000_delete_soft_deleted_redirect_elements;
 use craft\db\Migration;
