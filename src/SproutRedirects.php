@@ -8,8 +8,8 @@
 namespace barrelstrength\sproutredirects;
 
 use barrelstrength\sproutbase\base\BaseSproutTrait;
+use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
-use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
 use barrelstrength\sproutbaseredirects\models\Settings;
@@ -18,11 +18,13 @@ use craft\base\Plugin;
 use craft\db\Query;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
-use craft\helpers\Json;
+use craft\helpers\UrlHelper;
 use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
-use craft\events\ExceptionEvent;
 use craft\web\UrlManager;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use yii\base\Event;
 
 /**
@@ -31,6 +33,7 @@ use yii\base\Event;
  * @property array $cpUrlRules
  * @property array $userPermissions
  * @property mixed $settings
+ * @property null  $upgradeUrl
  * @property array $siteUrlRules
  */
 class SproutRedirects extends Plugin
@@ -57,7 +60,7 @@ class SproutRedirects extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.0';
+    public $schemaVersion = '1.1.0';
 
     const EDITION_LITE = 'lite';
     const EDITION_PRO = 'pro';
@@ -85,9 +88,10 @@ class SproutRedirects extends Plugin
 
         Craft::setAlias('@sproutredirects', $this->getBasePath());
 
-        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, function(ExceptionEvent $event) {
-            SproutBaseRedirects::$app->redirects->handleRedirectsOnException($event);
-        });
+        $redirectsService = SproutBaseRedirects::$app->redirects;
+        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, [
+            $redirectsService, 'handleRedirectsOnException'
+        ]);
 
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
             $event->rules = array_merge($event->rules, $this->getCpUrlRules());
@@ -136,6 +140,18 @@ class SproutRedirects extends Plugin
     }
 
     /**
+     * @inheritDoc
+     */
+    public function getUpgradeUrl()
+    {
+        if (!SproutBase::$app->settings->isEdition('sprout-redirects', self::EDITION_PRO)) {
+            return UrlHelper::cpUrl('sprout-redirects/upgrade');
+        }
+
+        return null;
+    }
+
+    /**
      * @return Settings
      */
     protected function createSettingsModel(): Settings
@@ -145,12 +161,13 @@ class SproutRedirects extends Plugin
 
     /**
      * @return string|null
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     protected function settingsHtml()
     {
-        return \Craft::$app->getView()->renderTemplate('sprout-redirects/settings', [
+        return Craft::$app->getView()->renderTemplate('sprout-redirects/settings', [
             'settings' => $this->getSettings()
         ]);
     }
