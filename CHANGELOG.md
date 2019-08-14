@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.1 - 2019-08-14
+
+### Changed
+- Updated barrelstrength/sprout-base-redirects requirement v1.1.2
+
+### Fixed
+- Fixed js console warning when Craft is only configured with a single Site
+- Fixed bug where incorrect return type hint was used
+
 ## 1.1.0 - 2019-08-06
 
 ### Added
