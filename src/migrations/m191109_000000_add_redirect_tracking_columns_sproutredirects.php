@@ -1,8 +1,8 @@
 <?php
 
-namespace barrelstrength\sproutseo\migrations;
+namespace barrelstrength\sproutredirects\migrations;
 
-use barrelstrength\sproutbasereports\migrations\m191109_000000_add_redirect_tracking_columns;
+use barrelstrength\sproutbaseredirects\migrations\m191109_000000_add_redirect_tracking_columns;
 use craft\db\Migration;
 use Throwable;
 
