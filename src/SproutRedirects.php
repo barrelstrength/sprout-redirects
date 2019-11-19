@@ -10,6 +10,7 @@ namespace barrelstrength\sproutredirects;
 use barrelstrength\sproutbase\base\BaseSproutTrait;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
+use barrelstrength\sproutbaseredirects\models\Settings as RedirectsSettingsModel;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
 use barrelstrength\sproutbaseredirects\models\Settings;
@@ -60,7 +61,7 @@ class SproutRedirects extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.1.0';
+    public $schemaVersion = '1.2.0';
 
     const EDITION_LITE = 'lite';
     const EDITION_PRO = 'pro';
