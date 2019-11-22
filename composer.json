@@ -1,7 +1,7 @@
 {
     "name": "barrelstrength/sprout-redirects",
     "description": "User-friendly Redirect Manager with 404 logging and Multi-Site support",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "type": "craft-plugin",
     "keywords": [
         "craft",
@@ -26,7 +26,7 @@
     },
     "require": {
         "craftcms/cms": "^3.1.0",
-        "barrelstrength/sprout-base-redirects": "^1.2.0",
+        "barrelstrength/sprout-base-redirects": "^1.2.1",
         "barrelstrength/sprout-base": "^5.0.8"
     },
     "autoload": {
