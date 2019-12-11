@@ -9,10 +9,10 @@
 ### Fixed
 - Added missing columns to Install migration [#19]
 - Fixed `dateLastUsed` column type
-- Fixed database prefix errors [#1][1pull-sproutbase-redirects]
+- Fixed database prefix errors [#1][1pull-sprout-base-redirects]
 
 [#19]: https://github.com/barrelstrength/craft-sprout-redirects/issues/19
-[1pull-sproutbase-redirects]: https://github.com/barrelstrength/craft-sprout-base-redirects/pull/1
+[1pull-sprout-base-redirects]: https://github.com/barrelstrength/craft-sprout-base-redirects/pull/1
 
 ## 1.2.2 - 2019-11-22
 
@@ -25,9 +25,9 @@
 - Updated barrelstrength/sprout-base-redirects requirement to v1.2.1
 
 ### Fixed
-- Fixed support for database prefixes when finding URLs [#18][#18-base-redirects]
+- Fixed support for database prefixes when finding URLs [#18][18-sprout-base-redirects]
 
-[#18-base-redirects] https://github.com/barrelstrength/craft-sprout-redirects/issues/18
+[18-sprout-base-redirects] https://github.com/barrelstrength/craft-sprout-redirects/issues/18
 
 ## 1.2.0 - 2019-11-19
 
@@ -51,14 +51,14 @@
 - Updated barrelstrength/sprout-base requirement to v5.0.8
 
 ### Fixed
-- Fixed open redirect vulnerability (thanks to Liam Stein) ([#176sproutseo])
+- Fixed open redirect vulnerability (thanks to Liam Stein) ([#176][176-sprout-seo])
 - Fixes bug where 404s could be matched before active redirects when matching regex URL patterns
 
 [#6]: https://github.com/barrelstrength/craft-sprout-redirects/issues/6
 [#7]: https://github.com/barrelstrength/craft-sprout-redirects/issues/7
 [#10]: https://github.com/barrelstrength/craft-sprout-redirects/issues/10
 [#16]: https://github.com/barrelstrength/craft-sprout-redirects/issues/16
-[#176sproutseo]: https://github.com/barrelstrength/craft-sprout-seo/issues/176
+[176-sprout-seo]: https://github.com/barrelstrength/craft-sprout-seo/issues/176
 
 ## 1.1.2 - 2019-08-16
 
