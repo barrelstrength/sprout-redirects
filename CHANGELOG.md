@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.3.1 - 2019-12-10
+## 1.2.3.2 - 2019-12-10
 
 ### Changed
 - Added method heading in Redirect sources sidebar 
