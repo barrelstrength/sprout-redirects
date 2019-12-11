@@ -61,7 +61,7 @@ class SproutRedirects extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.2.2';
+    public $schemaVersion = '1.2.3';
 
     const EDITION_LITE = 'lite';
     const EDITION_PRO = 'pro';
