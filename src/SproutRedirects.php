@@ -27,6 +27,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use yii\base\Event;
+use yii\web\Response;
 
 /**
  *
@@ -161,16 +162,15 @@ class SproutRedirects extends Plugin
     }
 
     /**
-     * @return string|null
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
+     * Redirect to Sprout Sitemaps settings
+     *
+     * @return \craft\web\Response|mixed|\yii\console\Response|Response
      */
-    protected function settingsHtml()
+    public function getSettingsResponse()
     {
-        return Craft::$app->getView()->renderTemplate('sprout-redirects/settings', [
-            'settings' => $this->getSettings()
-        ]);
+        $url = UrlHelper::cpUrl('sprout-redirects/settings');
+
+        return Craft::$app->getResponse()->redirect($url);
     }
 
     /**
