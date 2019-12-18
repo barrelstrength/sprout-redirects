@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.4 - 2019-12-18
+
+## Fixed
+- Fixed broken link to settings on Plugins page
+
 ## 1.2.3.2 - 2019-12-10
 
 ### Changed
