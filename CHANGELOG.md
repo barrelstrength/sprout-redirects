@@ -27,7 +27,7 @@
 ### Fixed
 - Fixed support for database prefixes when finding URLs [#18][18-sprout-base-redirects]
 
-[18-sprout-base-redirects] https://github.com/barrelstrength/craft-sprout-redirects/issues/18
+[18-sprout-base-redirects]: https://github.com/barrelstrength/craft-sprout-redirects/issues/18
 
 ## 1.2.0 - 2019-11-19
 
