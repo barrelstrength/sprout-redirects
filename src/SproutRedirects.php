@@ -27,12 +27,13 @@ use yii\web\Response;
 
 /**
  *
- * @property mixed $cpNavItem
- * @property array $cpUrlRules
- * @property array $userPermissions
- * @property mixed $settings
- * @property null  $upgradeUrl
- * @property array $siteUrlRules
+ * @property mixed                                                             $cpNavItem
+ * @property array                                                             $cpUrlRules
+ * @property array                                                             $userPermissions
+ * @property mixed                                                             $settings
+ * @property null                                                              $upgradeUrl
+ * @property \yii\console\Response|\craft\web\Response|\yii\web\Response|mixed $settingsResponse
+ * @property array                                                             $siteUrlRules
  */
 class SproutRedirects extends Plugin
 {
