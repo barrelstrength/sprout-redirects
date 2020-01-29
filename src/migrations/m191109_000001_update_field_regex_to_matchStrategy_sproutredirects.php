@@ -34,6 +34,7 @@ class m191109_000001_update_field_regex_to_matchStrategy_sproutredirects extends
     public function safeDown(): bool
     {
         echo "m191109_000001_update_field_regex_to_matchStrategy_sproutredirects cannot be reverted.\n";
+
         return false;
     }
 }

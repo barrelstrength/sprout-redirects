@@ -10,10 +10,9 @@ namespace barrelstrength\sproutredirects;
 use barrelstrength\sproutbase\base\BaseSproutTrait;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
-use barrelstrength\sproutbaseredirects\models\Settings as RedirectsSettingsModel;
+use barrelstrength\sproutbaseredirects\models\Settings;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
-use barrelstrength\sproutbaseredirects\models\Settings;
 use Craft;
 use craft\base\Plugin;
 use craft\db\Query;
@@ -23,9 +22,6 @@ use craft\helpers\UrlHelper;
 use craft\services\UserPermissions;
 use craft\web\ErrorHandler;
 use craft\web\UrlManager;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use yii\base\Event;
 use yii\web\Response;
 
@@ -41,6 +37,10 @@ use yii\web\Response;
 class SproutRedirects extends Plugin
 {
     use BaseSproutTrait;
+
+    const EDITION_LITE = 'lite';
+
+    const EDITION_PRO = 'pro';
 
     /**
      * Identify our plugin for BaseSproutTrait
@@ -63,9 +63,6 @@ class SproutRedirects extends Plugin
      * @var string
      */
     public $schemaVersion = '1.2.3';
-
-    const EDITION_LITE = 'lite';
-    const EDITION_PRO = 'pro';
 
     /**
      * @inheritdoc
@@ -154,14 +151,6 @@ class SproutRedirects extends Plugin
     }
 
     /**
-     * @return Settings
-     */
-    protected function createSettingsModel(): Settings
-    {
-        return new Settings();
-    }
-
-    /**
      * Redirect to Sprout Sitemaps settings
      *
      * @return \craft\web\Response|mixed|\yii\console\Response|Response
@@ -171,6 +160,28 @@ class SproutRedirects extends Plugin
         $url = UrlHelper::cpUrl('sprout-redirects/settings');
 
         return Craft::$app->getResponse()->redirect($url);
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserPermissions(): array
+    {
+        return [
+            // We need this permission on top of the accessplugin- permission
+            // so that we can support the matching permission in Sprout SEO
+            'sproutRedirects-editRedirects' => [
+                'label' => Craft::t('sprout-redirects', 'Edit Redirects')
+            ],
+        ];
+    }
+
+    /**
+     * @return Settings
+     */
+    protected function createSettingsModel(): Settings
+    {
+        return new Settings();
     }
 
     /**
@@ -206,20 +217,6 @@ class SproutRedirects extends Plugin
                     'sproutBaseSettingsType' => Settings::class
                 ]
             ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getUserPermissions(): array
-    {
-        return [
-            // We need this permission on top of the accessplugin- permission
-            // so that we can support the matching permission in Sprout SEO
-            'sproutRedirects-editRedirects' => [
-                'label' => Craft::t('sprout-redirects', 'Edit Redirects')
-            ],
         ];
     }
 }

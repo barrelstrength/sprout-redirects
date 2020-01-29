@@ -7,9 +7,9 @@
 
 namespace barrelstrength\sproutredirects\migrations;
 
-use craft\db\Migration;
-use barrelstrength\sproutbaseredirects\migrations\Install as SproutBaseRedirectsInstall;
 use barrelstrength\sproutbase\migrations\Install as SproutBaseInstall;
+use barrelstrength\sproutbaseredirects\migrations\Install as SproutBaseRedirectsInstall;
+use craft\db\Migration;
 use Throwable;
 
 class Install extends Migration

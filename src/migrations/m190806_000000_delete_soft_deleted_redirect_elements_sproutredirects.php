@@ -34,6 +34,7 @@ class m190806_000000_delete_soft_deleted_redirect_elements_sproutredirects exten
     public function safeDown(): bool
     {
         echo "m190806_000000_delete_soft_deleted_redirect_elements_sproutredirects cannot be reverted.\n";
+
         return false;
     }
 }

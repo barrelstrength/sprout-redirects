@@ -34,6 +34,7 @@ class m191109_000000_add_redirect_tracking_columns_sproutredirects extends Migra
     public function safeDown(): bool
     {
         echo "m191109_000000_add_redirect_tracking_columns_sproutredirects cannot be reverted.\n";
+
         return false;
     }
 }
