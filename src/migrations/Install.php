@@ -14,16 +14,10 @@ use Throwable;
 
 class Install extends Migration
 {
-    // Public Properties
-    // =========================================================================
-
     /**
      * @var string The database driver to use
      */
     public $driver;
-
-    // Public Methods
-    // =========================================================================
 
     /**
      * @return bool
