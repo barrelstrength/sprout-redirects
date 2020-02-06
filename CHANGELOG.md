@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0 - 2020-02-05
+
+### Added
+- Added `sproutbaseredirects/elements/Redirect::pluralDisplayName()`
+
+### Updated
+- Updated Redirect Element Index to support Craft 3.4
+- Updated models to use `defineRules()` method
+- Refactored asset management
+- Updated `barrelstrength/sprout-base-redirects` to v1.3.0
+
 ## 1.2.4.1 - 2019-12-18
 
 ### Fixed
