@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.1 - 2020-02-07
+
+### Added
+- Updated `barrelstrength/sprout-base-redirects` to v1.3.1
+
 ## 1.3.0 - 2020-02-05
 
 ### Added
