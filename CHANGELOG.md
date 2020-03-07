@@ -1,5 +1,17 @@
 # Changelog
 
+## UNRELEASED
+
+### Added
+- Added Enable Redirects setting to turn Redirect behavior on or off ([#20][#20-sproutredirects])
+
+### Fixed
+- Fixed bug where secondary sites redirected back to the main site ([#24][#24-sproutbaseredirects])
+- Fixed 404 Redirect priority when matching a redirect
+
+[#24-sproutbaseredirects]: https://github.com/barrelstrength/craft-sprout-redirects/issues/24
+[#20-sproutredirects]: https://github.com/barrelstrength/craft-sprout-redirects/issues/20
+
 ## 1.3.1 - 2020-02-07
 
 ### Added
