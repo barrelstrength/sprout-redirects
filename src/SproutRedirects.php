@@ -63,7 +63,7 @@ class SproutRedirects extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.2.3';
+    public $schemaVersion = '1.3.2';
 
     /**
      * @inheritdoc
