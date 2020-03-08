@@ -1,6 +1,6 @@
 # Changelog
 
-## UNRELEASED
+## 1.3.2 - 2020-03-08
 
 ### Added
 - Added Enable Redirects setting to turn Redirect behavior on or off ([#20][#20-sproutredirects])
