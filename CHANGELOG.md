@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.3 - 2020-04-09
+
+### Changed
+- Updated `barrelstrength/sprout-base` to v5.1.3
+
+### Fixed
+- Fixed welcome page display issue
+
 ## 1.3.2 - 2020-03-08
 
 ### Added
