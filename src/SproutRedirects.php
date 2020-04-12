@@ -7,7 +7,6 @@
 
 namespace barrelstrength\sproutredirects;
 
-use barrelstrength\sproutbase\base\BaseSproutTrait;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbaseredirects\models\Settings;
@@ -37,18 +36,10 @@ use yii\web\Response;
  */
 class SproutRedirects extends Plugin
 {
-    use BaseSproutTrait;
 
     const EDITION_LITE = 'lite';
 
     const EDITION_PRO = 'pro';
-
-    /**
-     * Identify our plugin for BaseSproutTrait
-     *
-     * @var string
-     */
-    public static $pluginHandle = 'sprout-redirects';
 
     /**
      * @var bool
