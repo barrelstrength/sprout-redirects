@@ -7,6 +7,8 @@
 
 namespace barrelstrength\sproutredirects;
 
+use barrelstrength\sproutbase\base\SproutDependencyInterface;
+use barrelstrength\sproutbase\base\SproutDependencyTrait;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbaseredirects\models\Settings;
@@ -34,8 +36,9 @@ use yii\web\Response;
  * @property \yii\console\Response|\craft\web\Response|\yii\web\Response|mixed $settingsResponse
  * @property array                                                             $siteUrlRules
  */
-class SproutRedirects extends Plugin
+class SproutRedirects extends Plugin implements SproutDependencyInterface
 {
+    use SproutDependencyTrait;
 
     const EDITION_LITE = 'lite';
 
