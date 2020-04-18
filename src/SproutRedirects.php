@@ -9,6 +9,7 @@ namespace barrelstrength\sproutredirects;
 
 use barrelstrength\sproutbase\base\SproutDependencyInterface;
 use barrelstrength\sproutbase\base\SproutDependencyTrait;
+use barrelstrength\sproutbase\records\Settings as SproutBaseSettingsRecord;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbaseredirects\models\Settings;
@@ -103,7 +104,7 @@ class SproutRedirects extends Plugin implements SproutDependencyInterface
         // Query the db directly because the SproutBaseRedirects Yii module may not yet be available
         $pluginSettings = (new Query())
             ->select('settings')
-            ->from('{{%sprout_settings}}')
+            ->from(SproutBaseSettingsRecord::tableName())
             ->where([
                 'model' => Settings::class
             ])
