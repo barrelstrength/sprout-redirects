@@ -12,7 +12,7 @@ use barrelstrength\sproutbase\base\SproutDependencyTrait;
 use barrelstrength\sproutbase\records\Settings as SproutBaseSettingsRecord;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
-use barrelstrength\sproutbaseredirects\models\Settings;
+use barrelstrength\sproutbaseredirects\models\Settings as SproutBaseRedirectsSettings;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirects;
 use barrelstrength\sproutbaseredirects\SproutBaseRedirectsHelper;
 use Craft;
@@ -174,10 +174,13 @@ class SproutRedirects extends Plugin implements SproutDependencyInterface
 
     /**
      * @return Settings
+
+    /**
+     * @return SproutBaseRedirectsSettings
      */
-    protected function createSettingsModel(): Settings
+    protected function createSettingsModel(): SproutBaseRedirectsSettings
     {
-        return new Settings();
+        return new SproutBaseRedirectsSettings();
     }
 
     /**
