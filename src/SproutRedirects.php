@@ -216,13 +216,13 @@ class SproutRedirects extends Plugin implements SproutDependencyInterface
             'sprout-redirects/settings/<settingsSectionHandle:.*>' => [
                 'route' => 'sprout/settings/edit-settings',
                 'params' => [
-                    'sproutBaseSettingsType' => Settings::class
+                    'sproutBaseSettingsType' => SproutBaseRedirectsSettings::class
                 ]
             ],
             'sprout-redirects/settings' => [
                 'route' => 'sprout/settings/edit-settings',
                 'params' => [
-                    'sproutBaseSettingsType' => Settings::class
+                    'sproutBaseSettingsType' => SproutBaseRedirectsSettings::class
                 ]
             ]
         ];
