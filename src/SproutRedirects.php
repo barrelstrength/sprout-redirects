@@ -1,8 +1,8 @@
 <?php
 /**
- * @link https://sprout.barrelstrengthdesign.com
+ * @link      https://sprout.barrelstrengthdesign.com
  * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
+ * @license   https://craftcms.github.io/license
  */
 
 namespace barrelstrength\sproutredirects;
@@ -29,13 +29,14 @@ use yii\web\Response;
 
 /**
  *
- * @property mixed                                                             $cpNavItem
- * @property array                                                             $cpUrlRules
- * @property array                                                             $userPermissions
- * @property mixed                                                             $settings
- * @property null                                                              $upgradeUrl
- * @property \yii\console\Response|\craft\web\Response|\yii\web\Response|mixed $settingsResponse
- * @property array                                                             $siteUrlRules
+ * @property mixed                                                    $cpNavItem
+ * @property array                                                    $cpUrlRules
+ * @property array                                                    $userPermissions
+ * @property mixed                                                    $settings
+ * @property null                                                     $upgradeUrl
+ * @property \yii\console\Response|\craft\web\Response|Response|mixed $settingsResponse
+ * @property array                                                    $sproutDependencies
+ * @property array                                                    $siteUrlRules
  */
 class SproutRedirects extends Plugin implements SproutDependencyInterface
 {
