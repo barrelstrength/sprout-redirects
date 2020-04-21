@@ -174,7 +174,15 @@ class SproutRedirects extends Plugin implements SproutDependencyInterface
     }
 
     /**
-     * @return Settings
+     * @return array
+     */
+    public function getSproutDependencies(): array
+    {
+        return [
+            SproutDependencyInterface::SPROUT_BASE,
+            SproutDependencyInterface::SPROUT_BASE_REDIRECTS
+        ];
+    }
 
     /**
      * @return SproutBaseRedirectsSettings
