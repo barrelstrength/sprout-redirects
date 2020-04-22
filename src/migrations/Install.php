@@ -13,7 +13,6 @@ use barrelstrength\sproutbaseredirects\migrations\Install as SproutBaseRedirects
 use barrelstrength\sproutredirects\SproutRedirects;
 use craft\db\Migration;
 use Throwable;
-use yii\db\Exception;
 
 class Install extends Migration
 {
