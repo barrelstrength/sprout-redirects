@@ -28,7 +28,6 @@ use yii\base\Event;
 use yii\web\Response;
 
 /**
- *
  * @property mixed                                                    $cpNavItem
  * @property array                                                    $cpUrlRules
  * @property array                                                    $userPermissions
@@ -107,7 +106,7 @@ class SproutRedirects extends Plugin implements SproutDependencyInterface
             ->select('settings')
             ->from(SproutBaseSettingsRecord::tableName())
             ->where([
-                'model' => Settings::class
+                'model' => SproutBaseRedirectsSettings::class
             ])
             ->scalar();
 
