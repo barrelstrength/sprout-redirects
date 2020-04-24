@@ -24,23 +24,30 @@ return [
     // Log 'Page Not Found' errors as 404 Redirects
     'enable404RedirectLog' => false,
 
-    // How to match 404 requests with Redirect records already captured in the database.
+    // How to match 404 requests with Redirect records already captured in
+    //the database.
     // urlWithQueryStrings: match the entire URL including query strings
-    // urlWithoutQueryStrings: remove all parameters from the request URL before searching for a match
+    // urlWithoutQueryStrings: remove all parameters from the request URL
+    //   before searching for a match
     'redirectMatchStrategy' => 'urlWithoutQueryStrings',
 
     // How to treat query strings after processing a redirect
-    // removeQueryStrings - remove the query string from the incoming URL entirely
-    // appendQueryStrings - add any query string from the incoming URL to the New Url
+    // removeQueryStrings - remove the query string from the incoming
+    //   URL entirely
+    // appendQueryStrings - add any query string from the incoming URL to
+    //   the New Url
     'queryStringStrategy' => 'removeQueryStrings',
 
     // Enable to capture the IP Address used when a 404 request is saved
     'trackRemoteIp' => false,
 
-    // The target number of 404 Redirects that will be stored in the database per-site, after the cleanup task runs.
+    // The target number of 404 Redirects that will be stored in the database
+    // per-site, after the cleanup task runs.
     'total404Redirects' => 250,
 
-    // The probability that the 404 Redirect cleanup task will run each web request
+    // The probability that the 404 Redirect cleanup task will run each
+    // web request
+    //
     // 0 - None
     // 100000 - 1 in 10
     // 10000 - 1 in 100
@@ -50,7 +57,8 @@ return [
     // 1 - 1 in 1,000,000
     'cleanupProbability' => 1000,
 
-    // Add any regular expression patterns you wish to exclude from the Redirect log.
-    // Overriding this setting will override any updates made by the "Add to Excluded URLs" action.
+    // Add any regular expression patterns you wish to exclude from the
+    // Redirect log. Overriding this setting will override any updates made by
+    // the "Add to Excluded URLs" action.
     // 'excludedUrlPatterns' => ''
 ];
