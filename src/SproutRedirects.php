@@ -198,30 +198,32 @@ class SproutRedirects extends Plugin implements SproutDependencyInterface
     {
         return [
             // Redirects
-            '<pluginHandle:sprout-redirects>/redirects/edit/<redirectId:\d+>/<siteHandle:.*>' =>
+            '<pluginHandle:sprout-redirects>/<pluginSection:redirects>/edit/<redirectId:\d+>/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/edit-redirect-template',
-            '<pluginHandle:sprout-redirects>/redirects/edit/<redirectId:\d+>' =>
+            '<pluginHandle:sprout-redirects>/<pluginSection:redirects>/edit/<redirectId:\d+>' =>
                 'sprout-base-redirects/redirects/edit-redirect-template',
-            '<pluginHandle:sprout-redirects>/redirects/new/<siteHandle:.*>' =>
+            '<pluginHandle:sprout-redirects>/<pluginSection:redirects>/new/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/edit-redirect-template',
-            '<pluginHandle:sprout-redirects>/redirects/new' =>
+            '<pluginHandle:sprout-redirects>/<pluginSection:redirects>/new' =>
                 'sprout-base-redirects/redirects/edit-redirect-template',
-            '<pluginHandle:sprout-redirects>/redirects/<siteHandle:.*>' =>
+            '<pluginHandle:sprout-redirects>/<pluginSection:redirects>/<siteHandle:.*>' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
-            '<pluginHandle:sprout-redirects>/redirects' =>
+            '<pluginHandle:sprout-redirects>/<pluginSection:redirects>' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
 
             // Settings
             'sprout-redirects/settings/<settingsSectionHandle:.*>' => [
                 'route' => 'sprout/settings/edit-settings',
                 'params' => [
-                    'sproutBaseSettingsType' => SproutBaseRedirectsSettings::class
+                    'sproutBaseSettingsType' => SproutBaseRedirectsSettings::class,
+                    'pluginHandle' => $this->handle
                 ]
             ],
             'sprout-redirects/settings' => [
                 'route' => 'sprout/settings/edit-settings',
                 'params' => [
-                    'sproutBaseSettingsType' => SproutBaseRedirectsSettings::class
+                    'sproutBaseSettingsType' => SproutBaseRedirectsSettings::class,
+                    'pluginHandle' => $this->handle
                 ]
             ]
         ];
