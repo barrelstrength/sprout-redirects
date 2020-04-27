@@ -210,6 +210,12 @@ class SproutRedirects extends Plugin implements SproutDependencyInterface
                 'sprout-base-redirects/redirects/redirects-index-template',
             '<pluginHandle:sprout-redirects>/<pluginSection:redirects>' =>
                 'sprout-base-redirects/redirects/redirects-index-template',
+            '<pluginHandle:sprout-redirects>' => [
+                'route' => 'sprout-base-redirects/redirects/redirects-index-template',
+                'params' => [
+                    'pluginSection' => 'redirects'
+                ]
+            ],
 
             // Settings
             'sprout-redirects/settings/<settingsSectionHandle:.*>' => [
