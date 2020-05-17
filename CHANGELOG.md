@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.5.1 - 2020-05-16
+
+### Changed
+- Improved saving of new Redirects if matching 404 exists ([#26])
+- Improved display of Base URL on Redirect edit page
+- Updated `barrelstrength/sprout-base-redirects` requirement v1.5.1
+
+[#26]: https://github.com/barrelstrength/craft-sprout-redirects/issues/26
+
 ## 1.5.0 - 2020-04-28
 
 ### Changed
