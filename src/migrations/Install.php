@@ -7,9 +7,10 @@
 
 namespace barrelstrength\sproutredirects\migrations;
 
-use barrelstrength\sproutbase\base\SproutDependencyInterface;
+use barrelstrength\sproutbase\config\base\DependencyInterface;
 use barrelstrength\sproutbase\migrations\Install as SproutBaseInstall;
-use barrelstrength\sproutbaseredirects\migrations\Install as SproutBaseRedirectsInstall;
+use barrelstrength\sproutbase\SproutBase;
+use barrelstrength\sproutbase\app\redirects\migrations\Install as SproutBaseRedirectsInstall;
 use barrelstrength\sproutredirects\SproutRedirects;
 use craft\db\Migration;
 use Throwable;
@@ -27,16 +28,7 @@ class Install extends Migration
      */
     public function safeUp(): bool
     {
-        $migration = new SproutBaseInstall();
-        ob_start();
-        $migration->safeUp();
-        ob_end_clean();
-
-        $migration = new SproutBaseRedirectsInstall();
-
-        ob_start();
-        $migration->safeUp();
-        ob_end_clean();
+        SproutBase::$app->config->runInstallMigrations(SproutRedirects::getInstance());
 
         return true;
     }
@@ -46,27 +38,7 @@ class Install extends Migration
      */
     public function safeDown(): bool
     {
-        /** @var SproutRedirects $plugin */
-        $plugin = SproutRedirects::getInstance();
-
-        $sproutBaseRedirectsInUse = $plugin->dependencyInUse(SproutDependencyInterface::SPROUT_BASE_REDIRECTS);
-        $sproutBaseInUse = $plugin->dependencyInUse(SproutDependencyInterface::SPROUT_BASE);
-
-        if (!$sproutBaseRedirectsInUse) {
-            $migration = new SproutBaseRedirectsInstall();
-
-            ob_start();
-            $migration->safeDown();
-            ob_end_clean();
-        }
-
-        if (!$sproutBaseInUse) {
-            $migration = new SproutBaseInstall();
-
-            ob_start();
-            $migration->safeDown();
-            ob_end_clean();
-        }
+        SproutBase::$app->config->runUninstallMigrations(SproutRedirects::getInstance());
 
         return true;
     }

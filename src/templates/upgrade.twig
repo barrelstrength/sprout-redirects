@@ -1,9 +1,9 @@
-{% extends "sprout-base/_layouts/baselanding" %}
+{% extends "sprout-base/_layouts/base-landing" %}
 {% import 'sprout-base/_includes/sproutcp' as sprout %}
 
 {% set title = "Upgrade to Sprout Redirects Pro"|t('sprout-redirects') %}
 {% set bodyClass = 'sprout-landing-page' %}
-{% set assetUrl = view.getAssetManager().getPublishedUrl('@sproutbaseredirects/web/assets/base/dist', true) -%}
+{% set assetUrl = view.getAssetManager().getPublishedUrl('@sproutbase/app/redirects/web/assets/base/dist', true) -%}
 {% set pluginStoreLink = currentUser.admin ? cpUrl('plugin-store/sprout-redirects') : 'https://plugins.craftcms.com/sprout-redirects' %}
 
 {% block content %}
