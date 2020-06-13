@@ -15,12 +15,6 @@
  */
 
 return [
-    // The name to display in the control panel in place of the plugin name
-    'pluginNameOverride' => 'Sprout Redirects',
-
-    // Process Redirect rules and log 404 requests.
-    'enableRedirects' => true,
-
     // Log 'Page Not Found' errors as 404 Redirects
     'enable404RedirectLog' => false,
 

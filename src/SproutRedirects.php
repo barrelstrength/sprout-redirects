@@ -7,22 +7,17 @@
 
 namespace barrelstrength\sproutredirects;
 
-use barrelstrength\sproutbase\config\base\SproutCentralInterface;
-use barrelstrength\sproutbase\config\configs\CampaignsConfig;
-use barrelstrength\sproutbase\config\configs\EmailConfig;
-use barrelstrength\sproutbase\config\configs\GeneralConfig;
+use barrelstrength\sproutbase\config\base\SproutBasePlugin;
+use barrelstrength\sproutbase\config\configs\ControlPanelConfig;
 use barrelstrength\sproutbase\config\configs\RedirectsConfig;
-use barrelstrength\sproutbase\config\configs\ReportsConfig;
-use barrelstrength\sproutbase\config\configs\SentEmailConfig;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use Craft;
-use craft\base\Plugin;
 use craft\helpers\UrlHelper;
 use craft\web\ErrorHandler;
 use yii\base\Event;
 
-class SproutRedirects extends Plugin implements SproutCentralInterface
+class SproutRedirects extends SproutBasePlugin
 {
     const EDITION_LITE = 'lite';
     const EDITION_PRO = 'pro';
@@ -31,6 +26,11 @@ class SproutRedirects extends Plugin implements SproutCentralInterface
      * @var string
      */
     public $schemaVersion = '1.3.2';
+
+    /**
+     * @var string
+     */
+    public $minVersionRequired = '1.5.2';
 
     /**
      * @inheritdoc
@@ -46,7 +46,7 @@ class SproutRedirects extends Plugin implements SproutCentralInterface
     public static function getSproutConfigs(): array
     {
         return [
-            GeneralConfig::class,
+            ControlPanelConfig::class,
             RedirectsConfig::class
         ];
     }
@@ -60,17 +60,15 @@ class SproutRedirects extends Plugin implements SproutCentralInterface
 
         SproutBaseHelper::registerModule();
 
-        Craft::setAlias('@sproutredirects', $this->getBasePath());
-
         $redirectsService = SproutBase::$app->redirects;
-        Event::on(ErrorHandler::class, ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, [
+
+        Event::on(
+            ErrorHandler::class,
+            ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, [
             $redirectsService, 'handleRedirectsOnException'
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getUpgradeUrl()
     {
         if (!SproutBase::$app->config->isEdition('sprout-redirects', self::EDITION_PRO)) {

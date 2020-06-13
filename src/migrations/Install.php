@@ -7,39 +7,35 @@
 
 namespace barrelstrength\sproutredirects\migrations;
 
-use barrelstrength\sproutbase\config\base\DependencyInterface;
-use barrelstrength\sproutbase\migrations\Install as SproutBaseInstall;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\app\redirects\migrations\Install as SproutBaseRedirectsInstall;
 use barrelstrength\sproutredirects\SproutRedirects;
 use craft\db\Migration;
-use Throwable;
+use ReflectionException;
+use yii\base\ErrorException;
+use yii\base\Exception;
+use yii\base\NotSupportedException;
+use yii\web\ServerErrorHttpException;
 
 class Install extends Migration
 {
     /**
-     * @var string The database driver to use
-     */
-    public $driver;
-
-    /**
      * @return bool
-     * @throws Throwable
+     * @throws ErrorException
+     * @throws Exception
+     * @throws NotSupportedException
+     * @throws ServerErrorHttpException
      */
     public function safeUp(): bool
     {
         SproutBase::$app->config->runInstallMigrations(SproutRedirects::getInstance());
-
-        return true;
     }
 
     /**
      * @return bool
+     * @throws ReflectionException
      */
     public function safeDown(): bool
     {
         SproutBase::$app->config->runUninstallMigrations(SproutRedirects::getInstance());
-
-        return true;
     }
 }
