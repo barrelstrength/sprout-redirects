@@ -46,7 +46,6 @@ class SproutRedirects extends SproutBasePlugin
     public static function getSproutConfigs(): array
     {
         return [
-            ControlPanelConfig::class,
             RedirectsConfig::class
         ];
     }
@@ -59,22 +58,5 @@ class SproutRedirects extends SproutBasePlugin
         parent::init();
 
         SproutBaseHelper::registerModule();
-
-        $redirectsService = SproutBase::$app->redirects;
-
-        Event::on(
-            ErrorHandler::class,
-            ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION, [
-            $redirectsService, 'handleRedirectsOnException'
-        ]);
-    }
-
-    public function getUpgradeUrl()
-    {
-        if (!SproutBase::$app->config->isEdition('sprout-redirects', self::EDITION_PRO)) {
-            return UrlHelper::cpUrl('sprout-redirects/upgrade');
-        }
-
-        return null;
     }
 }
