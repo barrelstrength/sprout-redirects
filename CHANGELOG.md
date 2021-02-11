@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.3 - 2021-02-11
+
+### Changed
+- Updated `barrelstrength/sprout-base-redirects` requirement v1.5.4
+
+### Fixed
+- Fixed issue where updating a Redirect could delete it ([#233][#233-sprout-seo])
+
+[#233-sprout-seo]: https://github.com/barrelstrength/craft-sprout-seo/issues/233
+
 ## 1.5.2 - 2020-05-21
 
 ### Added
