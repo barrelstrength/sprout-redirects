@@ -2,7 +2,7 @@
 
 namespace BarrelStrength\SproutRedirects;
 
-use BarrelStrength\Sprout\core\db\InstallHelper;
+use BarrelStrength\Sprout\core\db\MigrationHelper;
 use BarrelStrength\Sprout\core\db\SproutPluginMigrationInterface;
 use BarrelStrength\Sprout\core\db\SproutPluginMigrator;
 use BarrelStrength\Sprout\core\editions\Edition;
@@ -85,7 +85,7 @@ class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
      */
     protected function afterInstall(): void
     {
-        InstallHelper::runInstallMigrations($this);
+        MigrationHelper::runMigrations($this);
 
         if (Craft::$app->getRequest()->getIsConsoleRequest()) {
             return;
@@ -102,6 +102,6 @@ class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
      */
     protected function beforeUninstall(): void
     {
-        InstallHelper::runUninstallMigrations($this);
+        MigrationHelper::runUninstallMigrations($this);
     }
 }
