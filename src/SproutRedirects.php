@@ -11,21 +11,16 @@ use BarrelStrength\Sprout\redirects\RedirectsModule;
 use Craft;
 use craft\base\Plugin;
 use craft\db\MigrationManager;
-use craft\errors\MigrationException;
 use craft\events\RegisterComponentTypesEvent;
 use craft\helpers\UrlHelper;
 use yii\base\Event;
-use yii\base\InvalidConfigException;
 
 class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
 {
     public string $minVersionRequired = '1.5.3';
 
-    public string $schemaVersion = '0.0.1';
+    public string $schemaVersion = '4.44.444';
 
-    /**
-     * @inheritDoc
-     */
     public static function editions(): array
     {
         return [
@@ -41,9 +36,6 @@ class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
         ];
     }
 
-    /**
-     * @throws InvalidConfigException
-     */
     public function getMigrator(): MigrationManager
     {
         return SproutPluginMigrator::make($this);
@@ -77,9 +69,6 @@ class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
         }
     }
 
-    /**
-     * @throws MigrationException
-     */
     protected function afterInstall(): void
     {
         MigrationHelper::runMigrations($this);
@@ -93,10 +82,6 @@ class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
         Craft::$app->getResponse()->redirect($url)->send();
     }
 
-    /**
-     * @throws MigrationException
-     * @throws InvalidConfigException
-     */
     protected function beforeUninstall(): void
     {
         MigrationHelper::runUninstallMigrations($this);
