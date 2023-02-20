@@ -3,7 +3,8 @@
     "type": "craft-plugin",
     "version": "4.44.444",
     "require": {
-        "barrelstrength/sprout": "^4.0.0"
+        "barrelstrength/sprout": "^4.0.0",
+        "craftcms/cms": "^4.3"
     },
     "autoload": {
         "psr-4": {
