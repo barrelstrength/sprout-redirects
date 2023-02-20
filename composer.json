@@ -1,22 +1,22 @@
 {
-	"name": "barrelstrength/sprout-redirects",
-	"type": "craft-plugin",
-	"version": "0.0.1",
-	"require": {
-		"barrelstrength/sprout": "^0"
-	},
-	"autoload": {
-		"psr-4": {
-			"BarrelStrength\\SproutRedirects\\": "src/"
-		}
-	},
-	"extra": {
-		"name": "Sprout Redirects",
-		"handle": "sprout-redirects",
-		"developer": "Barrel Strength Design",
-		"developerUrl": "https://barrelstrengthdesign.com",
-		"developerEmail": "support@barrelstrengthdesign.com",
-		"documentationUrl": "https://barrelstrengthdesign.com",
-		"class": "BarrelStrength\\SproutRedirects\\SproutRedirects"
-	}
+    "name": "barrelstrength/sprout-redirects",
+    "type": "craft-plugin",
+    "version": "4.44.444",
+    "require": {
+        "barrelstrength/sprout": "^0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BarrelStrength\\SproutRedirects\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Sprout Redirects",
+        "handle": "sprout-redirects",
+        "developer": "Barrel Strength Design",
+        "developerUrl": "https://barrelstrengthdesign.com",
+        "developerEmail": "support@barrelstrengthdesign.com",
+        "documentationUrl": "https://barrelstrengthdesign.com",
+        "class": "BarrelStrength\\SproutRedirects\\SproutRedirects"
+    }
 }
