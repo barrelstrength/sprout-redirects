@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.45.0 - 2023-04-01
+
+- Requires `barrelstrength/sprout:v4.0.5`
+- See Redirects Module [release notes][#405redirects]
+
+[#405redirects]: https://github.com/barrelstrength/sprout/blob/4.0.5/CHANGELOG/CHANGELOG-REDIRECTS.md
+
 ## 4.44.445 - 2023-02-20
 
 ### Updated
@@ -8,10 +15,10 @@
 
 ## 4.44.444 - 2023-02-20
 
-### Updated
-
 > **Tip**
-> See the [Update Guide][#400upgrade] before migrating to Craft 4
+> Review the [Update Guide][#400upgrade] before migrating to Craft 4
+
+### Updated
 
 - Requires `barrelstrength/sprout:v4.0.0`
 - See Redirects Module [release notes][#400redirects]
