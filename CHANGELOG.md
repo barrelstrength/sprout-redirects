@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.46.0 - 2023-09-05
+
+- Requires `barrelstrength/sprout:v4.1.0`
+- See Redirects Module [release notes][#410redirects]
+
+[#410redirects]: https://github.com/barrelstrength/sprout/blob/4.1.0/CHANGELOG/CHANGELOG-REDIRECTS.md
+
 ## 4.45.2 - 2023-07-20
 
 - Requires `barrelstrength/sprout:v4.0.8`
