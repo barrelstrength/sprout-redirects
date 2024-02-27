@@ -19,7 +19,7 @@ class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
 {
     public string $minVersionRequired = '1.5.3';
 
-    public string $schemaVersion = '4.44.444';
+    public string $schemaVersion = '4.44.445';
 
     public static function editions(): array
     {

@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.46.2 - 2024-02-27
+
+- Requires `barrelstrength/sprout:4.1.7`
+- See Redirects Module [release notes][#417redirects]
+- See Sprout Framework Module [release notes][#417core]
+
+[#417redirects]: https://github.com/barrelstrength/craft-sprout/blob/4.1.7/CHANGELOG/CHANGELOG-REDIRECTS.md
+[#417core]: https://github.com/barrelstrength/craft-sprout/blob/4.1.7/CHANGELOG/CHANGELOG-CORE.md
+
 ## 4.46.1 - 2023-09-15
 
 - Requires `barrelstrength/sprout:v4.1.2`
