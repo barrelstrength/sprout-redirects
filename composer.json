@@ -1,10 +1,10 @@
 {
     "name": "barrelstrength/sprout-redirects",
     "type": "craft-plugin",
-    "version": "4.46.2",
+    "version": "4.47.0",
     "license": "proprietary",
     "require": {
-        "barrelstrength/sprout": "^4.1.7",
+        "barrelstrength/sprout": "^4.1.8",
         "craftcms/cms": "^4.3.0"
     },
     "autoload": {
