@@ -17,9 +17,9 @@ use yii\base\Event;
 
 class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
 {
-    public string $minVersionRequired = '1.5.3';
+    public string $minVersionRequired = '4.47.2';
 
-    public string $schemaVersion = '4.47.0';
+    public string $schemaVersion = '5.0.0';
 
     public static function editions(): array
     {
