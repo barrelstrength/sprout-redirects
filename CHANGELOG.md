@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.0.1 - 2024-06-30
+
+- Requires `barrelstrength/sprout:5.0.1`
+- See Redirects Module [release notes][#501redirects]
+
+[#501redirects]: https://github.com/barrelstrength/craft-sprout/blob/5.0.1/CHANGELOG/CHANGELOG-REDIRECTS.md
+
 ## 5.0.0 - 2024-06-30
 
 - Requires `barrelstrength/sprout:5.0.0`
