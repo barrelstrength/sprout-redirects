@@ -21,6 +21,8 @@ class SproutRedirects extends Plugin implements SproutPluginMigrationInterface
 
     public string $schemaVersion = '5.0.2';
 
+    public bool $hasCpSection = true;
+
     public static function editions(): array
     {
         return [
